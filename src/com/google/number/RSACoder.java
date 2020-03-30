@@ -66,9 +66,8 @@ public class RSACoder
      * @param keyByte 私钥
      */
     public static byte[] encryptPriKey(String data,
-                                       byte[] keyByte) throws NoSuchAlgorithmException, InvalidKeySpecException,
-            NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException,
-            UnsupportedEncodingException
+                                       byte[] keyByte) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException,
+            IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException
     {
         PrivateKey priKey = toPrivateKey(keyByte);//还原私钥
 
@@ -84,9 +83,8 @@ public class RSACoder
      * @param keyByte 公钥
      */
     public static byte[] encryptPubKey(String data,
-                                       byte[] keyByte) throws NoSuchAlgorithmException, InvalidKeySpecException,
-            NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException,
-            UnsupportedEncodingException
+                                       byte[] keyByte) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException,
+            IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException
     {
         PublicKey pubKey = toPublicKey(keyByte);//还原公钥
 
@@ -102,8 +100,8 @@ public class RSACoder
      * @param keyByte 私钥
      */
     public static byte[] decryptPriKey(byte[] data,
-                                       byte[] keyByte) throws NoSuchAlgorithmException, InvalidKeySpecException,
-            NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
+                                       byte[] keyByte) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException,
+            IllegalBlockSizeException, BadPaddingException
     {
         PrivateKey priKey = toPrivateKey(keyByte);//还原私钥
 
@@ -119,8 +117,8 @@ public class RSACoder
      * @param keyByte 公钥
      */
     public static byte[] decryptPubKey(byte[] data,
-                                       byte[] keyByte) throws NoSuchAlgorithmException, InvalidKeySpecException,
-            NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
+                                       byte[] keyByte) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException,
+            IllegalBlockSizeException, BadPaddingException
     {
         PublicKey pubKey = toPublicKey(keyByte);//还原公钥
 
@@ -162,9 +160,8 @@ public class RSACoder
      * @throws UnsupportedEncodingException
      */
     public static String getYourDataPublicKeyToPrivateKey(String sercertData,
-                                                          String privateKey) throws NoSuchPaddingException,
-            NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException,
-            InvalidKeySpecException, UnsupportedEncodingException
+                                                          String privateKey) throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException,
+            BadPaddingException, InvalidKeyException, InvalidKeySpecException, UnsupportedEncodingException
     {
         byte[] dataDecode = Base64.getDecoder().decode(sercertData);
         byte[] bytesPrivateKey = Base64.getDecoder().decode(privateKey);
@@ -193,9 +190,8 @@ public class RSACoder
      * @throws UnsupportedEncodingException
      */
     public static String getYourDataPrivateKeyToPublicKey(String sercetrData,
-                                                          String publicKey) throws NoSuchPaddingException,
-            NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException,
-            InvalidKeySpecException, UnsupportedEncodingException
+                                                          String publicKey) throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException,
+            BadPaddingException, InvalidKeyException, InvalidKeySpecException, UnsupportedEncodingException
     {
         byte[] dataDecoder = Base64.getDecoder().decode(sercetrData);
 
@@ -210,9 +206,8 @@ public class RSACoder
     /**
      * 测试
      */
-    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException,
-            InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException,
-            UnsupportedEncodingException
+    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException,
+            BadPaddingException, UnsupportedEncodingException
     {
         byte[] pubKey1;//甲方公钥
         byte[] priKey1;//甲方私钥
@@ -222,10 +217,8 @@ public class RSACoder
         pubKey1 = RSACoder.getPublicKey(keyPair1);
         priKey1 = RSACoder.getPrivateKey(keyPair1);
 
-        System.out.println("甲方公钥pubKey1-->" + Base64.getEncoder()
-                                                    .encodeToString(pubKey1) + "@@pubKey1.length-->" + pubKey1.length);
-        System.out.println("甲方私钥priKey1-->" + Base64.getEncoder()
-                                                    .encodeToString(priKey1) + "@@priKey1.length-->" + priKey1.length);
+        System.out.println("甲方公钥pubKey1-->" + Base64.getEncoder().encodeToString(pubKey1) + "@@pubKey1.length-->" + pubKey1.length);
+        System.out.println("甲方私钥priKey1-->" + Base64.getEncoder().encodeToString(priKey1) + "@@priKey1.length-->" + priKey1.length);
 
         /*********************测试甲方使用私钥加密数据向乙方发送，乙方使用公钥解密数据*********************/
         System.out.println("甲方-->乙方");
@@ -259,12 +252,12 @@ public class RSACoder
         byte[] bytesPrivateKey = RSACoder.encryptPriKey("9999999999999999999999", privateKey);
 
         System.out.println("\n*******************************************************************************");
-        System.out.println("加密私钥:"+Base64.getEncoder().encodeToString(privateKey));
+        System.out.println("加密私钥:" + Base64.getEncoder().encodeToString(privateKey));
         System.out.println("私钥加密以后的数字:" + Base64.getEncoder().encodeToString(bytesPrivateKey));
         System.out.println("*******************************************************************************\n");
         byte[] bytesPublicKey = RSACoder.decryptPubKey(bytesPrivateKey, publicKey);
         System.out.println("\n*******************************************************************************");
-        System.out.println("解密公钥:"+Base64.getEncoder().encodeToString(publicKey));
+        System.out.println("解密公钥:" + Base64.getEncoder().encodeToString(publicKey));
         System.out.println("公钥解密以后的数字:" + new String(bytesPublicKey, "UTF-8"));
         System.out.println("*******************************************************************************\n");
 
@@ -273,14 +266,34 @@ public class RSACoder
         byte[] bytesPrivateKeyDecoder = RSACoder.decryptPriKey(bytesPublicKeyEncoder, privateKey);
 
         System.out.println("\n*******************************************************************************");
-        System.out.println("加密公钥:"+Base64.getEncoder().encodeToString(publicKey));
+        System.out.println("加密公钥:" + Base64.getEncoder().encodeToString(publicKey));
         System.out.println("公钥加密后的数字:" + Base64.getEncoder().encodeToString(bytesPublicKeyEncoder));
         System.out.println("*******************************************************************************\n");
 
         System.out.println("\n*******************************************************************************");
-        System.out.println("解密私钥:"+Base64.getEncoder().encodeToString(privateKey));
+        System.out.println("解密私钥:" + Base64.getEncoder().encodeToString(privateKey));
         System.out.println("私钥解密后的数字:" + new String(bytesPrivateKeyDecoder, "UTF-8"));
         System.out.println("*******************************************************************************\n");
+
+        String yourDataPublicKeyToPrivateKey = getYourDataPublicKeyToPrivateKey("M4TCgbCH1JOm9zwIQ7ygw3KwNdHJC49yWqSTdpXb093j807cbsxX9owQcFSSUt4ssgfqW+mZxzlaDLYbiqGi/Q==",
+                                                                                "MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAl2t4t9efEz687qqn2/dyisl5tgDPhChsKUGMiM5LnXq" +
+                                                                                        "/ZyFb057k3tkIbS6cfRrtIZwHsVHFjzLMoB91muV1RQIDAQABAkEAlPRePsvYawAur8IletgDT9A+8PH" +
+                                                                                        "/MgzpyfP3oaT+8ZyJIcaxNc3je1CuwXaIsTOJZxKdk7yIJ8RntpPLddG/CQIhAMq" +
+                                                                                        "+vsPGQptuvcgwldmbGGLvY27i591CHYJgZSnLqTP7AiEAvzFxfRaVmMt" +
+                                                                                        "ZBWFemIXiswGL5QNkZ35sLpeUnNsad78CIHZhLY2uI5IR9SoAhF6Mmo6Z7FsAjhW41vYbRrZCvkclAiB/QQVsYG" +
+                                                                                        "/" + "Jdu8Vaa1wjwxIYKsgDpXxXG/cwv8jN6HyOQIgPo1eE7cM89oKLjStzmTHcdLKxiMw2/CLO+DhtaHDiIs=");
+
+
+        System.out.println("yourDataPublicKeyToPrivateKey:" + yourDataPublicKeyToPrivateKey);
+
+
+        String yourDataPrivateKeyToPublicKey = getYourDataPrivateKeyToPublicKey("UPfC2QjEHpFckdIOsLEevqseXHlBsgUKpCcVlm0U5JV78BK7ky/P9K5aMYmPNDjftV" + "/f8NZTMWM/zNq4IhVLpA==",
+                                                                                "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJv2IJmXhhQBk/LgNA++tGqJFtj" +
+                                                                                        "+V99jsXTfWSgQyDs67sBhlfEYNSRDeBzio7ubuvsY1yt6Xg7OaxZgZwzbVPMCAwEAAQ==");
+
+        System.out.println("yourDataPrivateKeyToPublicKey: " + yourDataPrivateKeyToPublicKey);
+
+
 
     }
 
